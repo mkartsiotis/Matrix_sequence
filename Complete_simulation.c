@@ -79,7 +79,7 @@ void process(void)
                                                 function(arr);
                                                 if (k == Num_of_repetitions - 3) // store third to last array as a number for faster comparison and check for oscillation
                                                     prev_num = arr_to_num(arr);
-                                                if (k == Num_of_repetitions - 3)
+                                                if (k == Num_of_repetitions - 2)
                                                     prev_num_1 = arr_to_num(arr);
                                             }
                                             num = arr_to_num(arr);

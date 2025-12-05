@@ -51,8 +51,7 @@ void print_arr(int arr1[10])
 
 void process(void)
 {
-
-    unsigned long long int prev_num, num;
+    unsigned long long int prev_num, prev_num_1, num;//prev_num is the third to last num of the sequence, prev_num1 is the second to last and num is the last
     int arr[10] = {0}; // The intial array of numbers
     for (int a = 0; a <= 9; a++)
         for (int b = a; b <= 9; b++)
@@ -79,17 +78,21 @@ void process(void)
                                             {
                                                 function(arr);
                                                 if (k == Num_of_repetitions - 3) // store third to last array as a number for faster comparison and check for oscillation
-                                                {
                                                     prev_num = arr_to_num(arr);
-                                                }
+                                                if (k == Num_of_repetitions - 3)
+                                                    prev_num_1 = arr_to_num(arr);
                                             }
                                             num = arr_to_num(arr);
+
                                             if (num == prev_num)
+                                            {
                                                 check_and_save(num);
-                                            
+                                                check_and_save(prev_num_1);
+                                            }
                                         }
     order_and_print();
 }
+
 unsigned long long int arr_to_num(int arr1[10])
 {
     unsigned long long int number = 0;
@@ -121,24 +124,24 @@ void order_and_print(void)
     // We will implement a bublesort technique to store the data in an ordered way
     for (size_t i = 0; i < count; i++)
     {
-        for (size_t k = 0; k < count-1; k++)
+        for (size_t k = 0; k < count - 1; k++)
         {
-            if (results[k] >= results[k+1])
+            if (results[k] >= results[k + 1])
                 ; // if the order is correct do not do anything
             else
             {
-                temp = results[k];       // stores the value of the results[k] temporarily
-                results[k] = results[k+1]; // puts the value of k to results[k]
-                results[k+1] = temp;           // puts temp in results[k+1]
+                temp = results[k];           // stores the value of the results[k] temporarily
+                results[k] = results[k + 1]; // puts the value of k to results[k]
+                results[k + 1] = temp;       // puts temp in results[k+1]
             }
         }
     }
     for (size_t i = 0; i < count; i++)
     {
-        if (i == 0 || results[i] != results[i - 1]) //Because we ordered the numbers now it is easy to check only sequential
+        if (i == 0 || results[i] != results[i - 1]) // Because we ordered the numbers now it is easy to check only sequential
             printf("%llu\n", results[i]);
     }
-    free(results);  // give the memory back to the OS
+    free(results); // give the memory back to the OS
     results = NULL;
 }
 int main(void)

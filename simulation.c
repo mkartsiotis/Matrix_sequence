@@ -33,7 +33,7 @@ void print_arr(int arr1[10])
 }
 void process(void)
 {
-    int arr[10] = {1, 1, 1, 1, 1, 1, 1, 2, 1, 1}; // The intial array of numbers
+    int arr[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}; // The intial array of numbers
     for (int i = 0; i < Num_of_repetitions; i++)
     {
         function(arr);

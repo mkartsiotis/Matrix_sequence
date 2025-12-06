@@ -27,7 +27,7 @@ unsigned long long int arr_to_num(int arr1[10]);                 // packs the ar
 unsigned long long *results = NULL;                              // This creates a pointer for results(is used in check and save)
 size_t count = 0, capacity = 0, numbers = 0, non_conv_count = 0; // count is the number of distinct cases. Capacity is the space allocated to the memory if a number is present. non_conv_count is #of non convergent sequences
 size_t non_conv[20] = {0};                                       // since from previous results we know well that the non-convergent initial conditions are just 11(20 is for safety). Note that the user must not reduce Num_of_repetions lower than 10.
-unsigned long long int arr_of_numbers[Num_of_repetitions] = {0};          // Creates space in memory for 100 size_t numbers
+unsigned long long int arr_of_numbers[Num_of_repetitions] = {0}; // Creates space in memory for 100 size_t numbers
 void function(int arr1[10])
 {
     int temp[10] = {0};
@@ -97,7 +97,7 @@ void process(void)
                                                     check_and_save(arr_of_numbers[k]);
                                                     break;
                                                 }
-                                                if (k == Num_of_repetitions - 1&&arr_of_numbers[k]!=0)
+                                                if (k == Num_of_repetitions - 1 && arr_of_numbers[k] != 0)
                                                 {
                                                     non_conv[non_conv_count] = arr_of_numbers[k];
                                                     printf("FOUND THIS: %llu\n", arr_of_numbers[k]);
@@ -146,6 +146,7 @@ void order_and_print(void)
     long long unsigned int temp = 0;
     // We will implement a bublesort technique to store the data in an ordered way
     printf("Found %llu non-converent cases.\n", non_conv_count);
+
     printf("Found %llu distinct non-zero cases for convergent cases.\nNow ordering the numbers and proofchecking to ensure no number is printed twice...\n", count);
     for (size_t i = 0; i < count; i++)
     {
@@ -166,7 +167,8 @@ void order_and_print(void)
         if (i == 0 || results[i] != results[i - 1]) // Because we ordered the numbers now it is easy to check only sequential
             printf("%llu\n", results[i]);
     }
-    printf("Found those non-convergent intitial sequences:\n");
+    if (non_conv_count != 0)
+        printf("Found those non-convergent intitial sequences:\n");
     for (size_t i = 0; i < non_conv_count; i++)
     {
         printf("%llu\n", non_conv[i]);

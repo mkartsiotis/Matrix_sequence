@@ -7,12 +7,15 @@ To check the results:
     2.If there is we save
 Changes: 1.Improoved effiency and less memory usage implementing checks before saving.
          2.Calculation of non convergent sequeences of digits
+         3.Finding the 11 numbers which do not give a circular of convergent pattern
+         4.checking them....
+         5.There is no odd 11!It was a bug!
 */
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 
-#define Num_of_repetitions 10
+#define Num_of_repetitions 100
 
 void process(void); // Handles the proccess of the array
 void print_arr(int arr1[10]);
@@ -23,7 +26,8 @@ int is_circular(int repetitions);                                // This functio
 unsigned long long int arr_to_num(int arr1[10]);                 // packs the array into just a number to check faster
 unsigned long long *results = NULL;                              // This creates a pointer for results(is used in check and save)
 size_t count = 0, capacity = 0, numbers = 0, non_conv_count = 0; // count is the number of distinct cases. Capacity is the space allocated to the memory if a number is present. non_conv_count is #of non convergent sequences
-unsigned long long int arr_of_numbers[Num_of_repetitions] = {0}; // Creates space in memory for 100 size_t numbers
+size_t non_conv[20] = {0};                                       // since from previous results we know well that the non-convergent initial conditions are just 11(20 is for safety). Note that the user must not reduce Num_of_repetions lower than 10.
+unsigned long long int arr_of_numbers[Num_of_repetitions] = {0};          // Creates space in memory for 100 size_t numbers
 void function(int arr1[10])
 {
     int temp[10] = {0};
@@ -93,8 +97,12 @@ void process(void)
                                                     check_and_save(arr_of_numbers[k]);
                                                     break;
                                                 }
-                                                if (k == Num_of_repetitions - 1)
+                                                if (k == Num_of_repetitions - 1&&arr_of_numbers[k]!=0)
+                                                {
+                                                    non_conv[non_conv_count] = arr_of_numbers[k];
+                                                    printf("FOUND THIS: %llu\n", arr_of_numbers[k]);
                                                     non_conv_count++;
+                                                }
                                             }
                                         }
         printf("Generating numbers and checking convergence. Progess is in......%i%%\n", (a + 1) * 10);
@@ -157,6 +165,11 @@ void order_and_print(void)
     {
         if (i == 0 || results[i] != results[i - 1]) // Because we ordered the numbers now it is easy to check only sequential
             printf("%llu\n", results[i]);
+    }
+    printf("Found those non-convergent intitial sequences:\n");
+    for (size_t i = 0; i < non_conv_count; i++)
+    {
+        printf("%llu\n", non_conv[i]);
     }
     free(results); // give the memory back to the OS
     results = NULL;

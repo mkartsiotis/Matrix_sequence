@@ -93,7 +93,7 @@ void process(void)
                                                     check_and_save(arr_of_numbers[k]);
                                                     break;
                                                 }
-                                                if (k == Num_of_repetitions - 1)
+                                                if (k == Num_of_repetitions - 1&&arr_of_numbers[k]!=0)
                                                     non_conv_count++;
                                             }
                                         }
